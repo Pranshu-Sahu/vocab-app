@@ -1,0 +1,875 @@
+[
+  {
+    "word": "Attack",
+    "id": 149,
+    "meaning": "Act of using violence to harm",
+    "synonyms": ["Assault"],
+    "antonyms": ["Defence", "Defend"],
+    "exampleSentence": "The army launched a surprise attack on the enemy base at dawn.",
+    "mnemonic": "AT + TACK → Imagine pinning a TACK AT someone — that's an attack!"
+  },
+  {
+    "word": "Attenuate",
+    "id": 150,
+    "meaning": "Reduce the force, effect, or value of",
+    "synonyms": ["Weaken"],
+    "antonyms": ["Strong"],
+    "exampleSentence": "The thick walls attenuate the noise from the busy street outside.",
+    "mnemonic": "A-TEN-U-ATE → A TEN became an EIGHT — it got reduced!"
+  },
+  {
+    "word": "Augment",
+    "id": 154,
+    "meaning": "Make (something) greater by adding to it; increase",
+    "synonyms": ["Enhance"],
+    "antonyms": ["Degrade", "Decrease", "Diminish"],
+    "exampleSentence": "She decided to augment her income by taking a part-time tutoring job.",
+    "mnemonic": "AUG-MENT → Think of AUGUST being the month things GROW (augment) before harvest."
+  },
+  {
+    "word": "Auspicious",
+    "id": 155,
+    "meaning": "Conducive to success; favourable",
+    "synonyms": ["Favourable", "Fortunate"],
+    "antonyms": ["Unlucky", "Ominous"],
+    "exampleSentence": "The wedding was held on an auspicious day chosen by the family priest.",
+    "mnemonic": "AU-SPICIOUS → Sounds like 'AUS-PRECIOUS' — gold (Au) is precious and favourable!"
+  },
+  {
+    "word": "Autonomy",
+    "id": 158,
+    "meaning": "The right or condition of self-government",
+    "synonyms": ["Independent"],
+    "antonyms": ["Dependence"],
+    "exampleSentence": "The university grants its departments a high degree of autonomy in curriculum design.",
+    "mnemonic": "AUTO-NOMY → AUTO means self, like an AUTOmatic car drives itself."
+  },
+  {
+    "word": "Aversion",
+    "id": 159,
+    "meaning": "A strong dislike or disinclination",
+    "synonyms": ["Dislike", "Hostility"],
+    "antonyms": ["Attraction", "Liking"],
+    "exampleSentence": "He has a strong aversion to public speaking and avoids it whenever possible.",
+    "mnemonic": "A-VERSION → Imagine seeing A bad VERSION of a movie — you'd have a strong dislike!"
+  },
+  {
+    "word": "Avoid",
+    "id": 160,
+    "meaning": "Keep away from or stop oneself from doing (something)",
+    "synonyms": ["Evade"],
+    "antonyms": ["Meet", "Seek"],
+    "exampleSentence": "She tried to avoid making eye contact with her former boss at the party.",
+    "mnemonic": "A-VOID → There's a VOID (empty space) because you stayed away!"
+  },
+  {
+    "word": "Awful",
+    "id": 161,
+    "meaning": "Very bad or unpleasant",
+    "synonyms": ["Terrible"],
+    "antonyms": ["Wonderful"],
+    "exampleSentence": "The weather was so awful that the outdoor concert had to be cancelled.",
+    "mnemonic": "AWE-FUL → Originally meant 'full of awe' but now means terribly bad."
+  },
+  {
+    "word": "Banal",
+    "id": 164,
+    "meaning": "So lacking in originality as to be obvious and boring",
+    "synonyms": ["Commonplace", "Mundane"],
+    "antonyms": ["Novel", "Sharp", "Ingenious"],
+    "exampleSentence": "His banal remarks about the weather failed to impress anyone at the dinner.",
+    "mnemonic": "BAN-ALL → BAN ALL boring, unoriginal things — they're banal!"
+  },
+  {
+    "word": "Bane",
+    "id": 165,
+    "meaning": "A cause of great distress or annoyance",
+    "synonyms": ["Curse"],
+    "antonyms": ["Boon"],
+    "exampleSentence": "Mosquitoes are the bane of every summer camping trip.",
+    "mnemonic": "BANE rhymes with PAIN — the bane of your existence causes you pain!"
+  },
+  {
+    "word": "Banter",
+    "id": 166,
+    "meaning": "The playful and friendly exchange of teasing remarks; as a verb, to exchange teasing remarks",
+    "synonyms": ["Repartee"],
+    "antonyms": ["Praise"],
+    "exampleSentence": "The colleagues enjoyed light banter over coffee every morning.",
+    "mnemonic": "BAN-TER → Imagine a BAN on TERROR — only playful teasing allowed!"
+  },
+  {
+    "word": "Barbaric",
+    "id": 167,
+    "meaning": "Savagely cruel; exceedingly brutal",
+    "synonyms": ["Uncivilized", "Crude", "Brutal"],
+    "antonyms": ["Civilized"],
+    "exampleSentence": "The barbaric treatment of prisoners shocked the international community.",
+    "mnemonic": "BARBAR-IC → Barbarians were known for being savage and uncivilized."
+  },
+  {
+    "word": "Bare",
+    "id": 168,
+    "meaning": "Not clothed or covered",
+    "synonyms": ["Basic"],
+    "antonyms": ["Covered"],
+    "exampleSentence": "The trees stood bare after shedding all their leaves in autumn.",
+    "mnemonic": "BARE → A BEAR in the wild is bare — no clothes!"
+  },
+  {
+    "word": "Barren",
+    "id": 169,
+    "meaning": "(Of land) too poor to produce much or any vegetation",
+    "synonyms": ["Unproductive", "Infertile", "Desolate", "Unfruitful", "Fruitless"],
+    "antonyms": ["Fertile"],
+    "exampleSentence": "The barren desert stretched for miles with no sign of life.",
+    "mnemonic": "BARREN → BAR + REN → Imagine a BAR in a barREN wasteland — nothing grows there."
+  },
+  {
+    "word": "Barrier",
+    "id": 170,
+    "meaning": "A fence or other obstacle that prevents movement or access",
+    "synonyms": ["Bound"],
+    "antonyms": ["Opening"],
+    "exampleSentence": "Language can be a significant barrier to communication in international business.",
+    "mnemonic": "BARR-IER → A BAR across the road blocks your way — a barrier!"
+  },
+  {
+    "word": "Beautiful",
+    "id": 171,
+    "meaning": "Pleasing the senses or mind aesthetically",
+    "synonyms": ["Handsome", "Pretty"],
+    "antonyms": ["Ugly", "Blemish"],
+    "exampleSentence": "The beautiful sunset painted the sky in shades of orange and purple.",
+    "mnemonic": "BEAUTY-FULL → Full of beauty, pleasing to look at."
+  },
+  {
+    "word": "Beguile",
+    "id": 172,
+    "meaning": "To charm or enchant (someone), sometimes in a deceptive way",
+    "synonyms": ["Deceive"],
+    "antonyms": ["Honest"],
+    "exampleSentence": "The cunning salesman tried to beguile customers with flattering words.",
+    "mnemonic": "BE-GUILE → BE full of GUILE (cunning) — to charm deceptively."
+  },
+  {
+    "word": "Belligerent",
+    "id": 173,
+    "meaning": "Hostile and aggressive; engaging in war or conflict; warlike",
+    "synonyms": ["Hostile", "Antagonistic", "Contentious"],
+    "antonyms": ["Pacifist"],
+    "exampleSentence": "The belligerent tone of his speech made negotiations even harder.",
+    "mnemonic": "BELL-I-GERENT → Imagine ringing a BELL to start a war — belligerent means warlike!"
+  },
+  {
+    "word": "Benediction",
+    "id": 174,
+    "meaning": "The utterance of a blessing, especially at the end of a religious service",
+    "synonyms": ["Blessings"],
+    "antonyms": ["Criticism"],
+    "exampleSentence": "The priest offered a benediction to the congregation before they departed.",
+    "mnemonic": "BENE-DICTION → BENE means good (like benefit), DICTION means speech — good speech = blessing."
+  },
+  {
+    "word": "Beneficial",
+    "id": 175,
+    "meaning": "Favourable or advantageous; resulting in good",
+    "synonyms": ["Advantageous", "Helpful"],
+    "antonyms": ["Harmful"],
+    "exampleSentence": "Regular exercise is highly beneficial to both physical and mental health.",
+    "mnemonic": "BENE-FICIAL → BENE means good — something beneficial brings good results."
+  },
+  {
+    "word": "Benevolent",
+    "id": 177,
+    "meaning": "Well meaning and kindly",
+    "synonyms": ["Kind", "Generous", "Compassionate"],
+    "antonyms": ["Malevolent", "Stingy", "Selfish", "Miserly"],
+    "exampleSentence": "The benevolent businessman donated millions to build schools in rural areas.",
+    "mnemonic": "BENE-VOLENT → BENE (good) + VOLENT (willing) — willing to do good."
+  },
+  {
+    "word": "Bewilder",
+    "id": 182,
+    "meaning": "Cause (someone) to become perplexed and confused",
+    "synonyms": ["Baffle"],
+    "antonyms": ["Enlighten"],
+    "exampleSentence": "The complex math problem bewildered the students during the exam.",
+    "mnemonic": "BE-WILDER → Being in the WILD with no map would leave you confused and bewildered!"
+  },
+  {
+    "word": "Bifurcate",
+    "id": 183,
+    "meaning": "To divide into two branches or parts",
+    "synonyms": ["Divided Into two"],
+    "antonyms": ["Combine"],
+    "exampleSentence": "The river bifurcates into two streams just north of the village.",
+    "mnemonic": "BI-FURCATE → BI means two (like bicycle) — to split into two parts."
+  },
+  {
+    "word": "Bizarre",
+    "id": 184,
+    "meaning": "Very strange or unusual",
+    "synonyms": ["Odd", "Weird", "Unusual"],
+    "antonyms": ["Usual", "Ordinary"],
+    "exampleSentence": "It was bizarre to see snow falling in the middle of summer.",
+    "mnemonic": "BIZARRE → Sounds like BAZAAR — imagine a BAZAAR selling only bizarre, weird things!"
+  },
+  {
+    "word": "Blame",
+    "id": 185,
+    "meaning": "Responsibility for a fault or wrong; as a verb, to assign responsibility for a fault or wrong",
+    "synonyms": ["Accuse"],
+    "antonyms": ["Praise", "Compliment"],
+    "exampleSentence": "The manager tried to blame the intern for the project's failure.",
+    "mnemonic": "B-LAME → When you BLAME someone, you call them LAME for their mistake."
+  },
+  {
+    "word": "Bleak",
+    "id": 187,
+    "meaning": "Bare and exposed; cold and miserable; not hopeful",
+    "synonyms": ["Depressing", "Grim"],
+    "antonyms": ["Bright", "Cordial"],
+    "exampleSentence": "The economic forecast looks bleak with rising unemployment and inflation.",
+    "mnemonic": "BLEAK rhymes with WEAK — a bleak future looks weak and hopeless."
+  },
+  {
+    "word": "Blend",
+    "id": 188,
+    "meaning": "Mix together; combine; form a harmonious combination",
+    "synonyms": ["Merge", "Fusion"],
+    "antonyms": ["Separate"],
+    "exampleSentence": "The chef learned to blend spices from different cuisines to create unique flavors.",
+    "mnemonic": "BLEND → Think of a BLENDER mixing fruits together."
+  },
+  {
+    "word": "Bliss",
+    "id": 189,
+    "meaning": "Perfect happiness; great joy",
+    "synonyms": ["Happiness", "Joy"],
+    "antonyms": ["Sorrow", "Misery"],
+    "exampleSentence": "The couple lived in bliss during the first few months of their marriage.",
+    "mnemonic": "BLISS → A warm KISS brings BLISS — perfect happiness!"
+  },
+  {
+    "word": "Block",
+    "id": 191,
+    "meaning": "A large solid piece of hard material; as a verb, to obstruct or impede",
+    "synonyms": ["Obstruct"],
+    "antonyms": ["Clear"],
+    "exampleSentence": "A fallen tree was used to block the road during the protest.",
+    "mnemonic": "BLOCK → A solid BLOCK of concrete blocks your path."
+  },
+  {
+    "word": "Blunt",
+    "id": 192,
+    "meaning": "(Of a cutting instrument) not having a sharp edge or point; as a verb, to make or become less sharp",
+    "synonyms": ["Dull", "Snippy"],
+    "antonyms": ["Sharp"],
+    "exampleSentence": "His blunt remarks about her cooking hurt her feelings deeply.",
+    "mnemonic": "BLUNT → A BLUNT knife can't cut — it's dull, just like blunt words lack finesse."
+  },
+  {
+    "word": "Boast",
+    "id": 193,
+    "meaning": "Speak with excessive pride; possess (something impressive)",
+    "synonyms": ["Pride", "Brag"],
+    "antonyms": ["Deprecate"],
+    "exampleSentence": "He would always boast about his high score to anyone who would listen.",
+    "mnemonic": "BOAST → Like making a TOAST to yourself — excessive self-praise!"
+  },
+  {
+    "word": "Bogus",
+    "id": 194,
+    "meaning": "Not genuine or true",
+    "synonyms": ["Fake", "False"],
+    "antonyms": ["Authentic"],
+    "exampleSentence": "The police discovered the businessman was using bogus documents for his visa.",
+    "mnemonic": "BO-GUS → Sounds like 'NO GUSTO' — a fake thing has no real gusto or authenticity."
+  },
+  {
+    "word": "Boisterous",
+    "id": 195,
+    "meaning": "Noisy, energetic, and cheerful; rowdy",
+    "synonyms": ["Noisy", "Clamorous"],
+    "antonyms": ["Calm", "Peaceful", "Restrained", "Silent", "Solemn", "Phlegmatic"],
+    "exampleSentence": "The boisterous crowd cheered loudly as the team scored the winning goal.",
+    "mnemonic": "BOI-STEROUS → Think of rowdy BOYS being STEROUS (noisy) at a party!"
+  },
+  {
+    "word": "Bountiful",
+    "id": 196,
+    "meaning": "Large in quantity; abundant; liberal or generous in bestowing gifts or favors",
+    "synonyms": ["Generous"],
+    "antonyms": ["Meagre"],
+    "exampleSentence": "The farmer's bountiful harvest was enough to feed the entire village.",
+    "mnemonic": "BOUNTY-FULL → Full of BOUNTY — generous and abundant!"
+  },
+  {
+    "word": "Brave",
+    "id": 197,
+    "meaning": "Endure or face unpleasant conditions; dare to do something; ready to face danger",
+    "synonyms": ["Daring"],
+    "antonyms": ["Coward", "Fearful"],
+    "exampleSentence": "The brave firefighter rushed into the burning building to save the child.",
+    "mnemonic": "BRAVE → Think of a lion's ROAR — the BRAVE animal of the jungle."
+  },
+  {
+    "word": "Brazen",
+    "id": 198,
+    "meaning": "Bold and without shame; as a verb, to face something boldly or shamelessly",
+    "synonyms": ["Bold", "Unashamed"],
+    "antonyms": ["Modest"],
+    "exampleSentence": "His brazen disregard for the rules shocked everyone in the office.",
+    "mnemonic": "BRAZEN → Sounds like BLAZING — someone with BLAZING boldness, no shame!"
+  },
+  {
+    "word": "Breach",
+    "id": 199,
+    "meaning": "Act of breaking or failing to observe a law, agreement, or code of conduct; gap in a wall",
+    "synonyms": ["Violation"],
+    "antonyms": ["Abidance"],
+    "exampleSentence": "The company was sued for a breach of contract with its suppliers.",
+    "mnemonic": "BREACH → BREAK + REACH — when someone BREAKs a promise, they've breached it."
+  },
+  {
+    "word": "Brevity",
+    "id": 200,
+    "meaning": "Concise and exact use of words in writing or speech; shortness of time",
+    "synonyms": ["Crispness", "Conciseness"],
+    "antonyms": ["Verbosity"],
+    "exampleSentence": "The professor was known for the brevity of her lectures — always precise and to the point.",
+    "mnemonic": "BREV-ITY → BRIEF-ITY — brevity means being BRIEF and concise."
+  },
+  {
+    "word": "Brief",
+    "id": 201,
+    "meaning": "Short in time, duration, length, or extent; concise",
+    "synonyms": ["Concise", "Short"],
+    "antonyms": ["Elaborate", "Lengthy"],
+    "exampleSentence": "The manager gave a brief overview of the project before the detailed presentation.",
+    "mnemonic": "BRIEF → Like a BRIEF case — small and compact, containing only the essentials."
+  },
+  {
+    "word": "Brisk",
+    "id": 202,
+    "meaning": "Active, fast, and energetic",
+    "synonyms": ["Quick", "Hurried"],
+    "antonyms": ["Slow", "Lazy", "Idle"],
+    "exampleSentence": "She took a brisk walk around the park to clear her mind before the exam.",
+    "mnemonic": "BRISK → Think of a cold BREEZE that makes you walk BRISKLY to stay warm!"
+  },
+  {
+    "word": "Brittle",
+    "id": 203,
+    "meaning": "Hard but liable to break easily",
+    "synonyms": ["Fragile"],
+    "antonyms": ["Strong", "Resilient", "Robust", "Unbreakable"],
+    "exampleSentence": "The brittle glass shattered into pieces when it fell from the shelf.",
+    "mnemonic": "BRITTLE → BRIT + LITTLE — a LITTLE pressure makes BRITTLE things break."
+  },
+  {
+    "word": "Brutal",
+    "id": 204,
+    "meaning": "Savagely violent",
+    "synonyms": ["Savage", "Cruel"],
+    "antonyms": ["Humane"],
+    "exampleSentence": "The dictator's brutal regime oppressed the people for decades.",
+    "mnemonic": "BRUT-AL → BRUTE + ALL — a brute is someone who is violent, all the time."
+  },
+  {
+    "word": "Bucolic",
+    "id": 205,
+    "meaning": "Relating to the pleasant aspects of the countryside and country life",
+    "synonyms": ["Pastoral"],
+    "antonyms": ["Urban"],
+    "exampleSentence": "The bucolic scenery of rolling hills and meadows made for a perfect weekend retreat.",
+    "mnemonic": "BU-COLIC → Imagine a BULL (BU) having a FROLIC in the countryside — that's bucolic!"
+  },
+  {
+    "word": "Bustle",
+    "id": 207,
+    "meaning": "Move in an energetic or noisy manner; as a noun, excited activity and movement",
+    "synonyms": ["Haste", "Rush"],
+    "antonyms": ["Motionless"],
+    "exampleSentence": "The market was full of bustle as vendors shouted and customers haggled over prices.",
+    "mnemonic": "BUSTLE → BUS-TLE — imagine the HUSTLE and BUSTLE at a BUS stop!"
+  },
+  {
+    "word": "Cajole",
+    "id": 208,
+    "meaning": "Persuade (someone) to do something by sustained coaxing or flattery",
+    "synonyms": ["Flatter", "Entice", "Persuade", "Deceive"],
+    "antonyms": ["Repulse", "Bully"],
+    "exampleSentence": "She tried to cajole her brother into lending her his car for the weekend.",
+    "mnemonic": "CA-JOLE → Imagine a CA (chartered accountant) telling JOLEs (jokes) to flatter clients."
+  },
+  {
+    "word": "Calamity",
+    "id": 209,
+    "meaning": "An event causing great and often sudden damage or distress; a disaster",
+    "synonyms": ["Catastrophe", "Disaster", "Debacle", "Adversity"],
+    "antonyms": ["Happiness"],
+    "exampleSentence": "The earthquake was a calamity that left thousands of people homeless.",
+    "mnemonic": "CALAM-ITY → CLAM-ITY — imagine clams screaming in a disaster!"
+  },
+  {
+    "word": "Callous",
+    "id": 210,
+    "meaning": "Showing or having an insensitive and cruel disregard for others",
+    "synonyms": ["Brutal", "Insensitive", "Unfeeling"],
+    "antonyms": ["Caring", "Sensitive", "Sympathetic", "Concerned", "Considerate", "Tender"],
+    "exampleSentence": "His callous attitude towards the poor showed a complete lack of empathy.",
+    "mnemonic": "CALL-OUS → Someone who doesn't CALL to check on others — cold and callous."
+  },
+  {
+    "word": "Calm",
+    "id": 211,
+    "meaning": "Peaceful and undisturbed; freedom from storm or disturbance; tranquility",
+    "synonyms": ["Peaceful", "Relaxed", "Quiet", "Unruffled"],
+    "antonyms": ["Excited", "Turbulent", "Stormy", "Frenzy", "Agitate"],
+    "exampleSentence": "Despite the chaos around her, she remained perfectly calm and composed.",
+    "mnemonic": "CALM → Think of a CALM lake — still, peaceful, undisturbed."
+  },
+  {
+    "word": "Camouflage",
+    "id": 212,
+    "meaning": "Disguise or conceal; protective colouring or disguise in animals",
+    "synonyms": ["Disguise"],
+    "antonyms": ["Reveal"],
+    "exampleSentence": "The soldier's camouflage uniform helped him blend into the forest surroundings.",
+    "mnemonic": "CAMO-FLAGE → CAMO is short for camouflage — army patterns that help you hide."
+  },
+  {
+    "word": "Candid",
+    "id": 213,
+    "meaning": "Truthful and straightforward; frank",
+    "synonyms": ["Frank", "Honest", "Forthright", "Blunt", "Direct", "Outspoken", "Bluff", "Straightforward"],
+    "antonyms": ["Devious", "Cunning", "Artful", "Deceitful", "Biased"],
+    "exampleSentence": "The candidate gave a candid interview about the challenges she faced growing up.",
+    "mnemonic": "CAN-DID → A CANDIDATE who DID tell the truth — candid means honest!"
+  },
+  {
+    "word": "Cantankerous",
+    "id": 214,
+    "meaning": "Bad tempered, argumentative, and uncooperative",
+    "synonyms": ["Quarrelsome", "Bad Tempered", "Grouchy"],
+    "antonyms": ["Convivial"],
+    "exampleSentence": "The cantankerous old man yelled at children who stepped on his lawn.",
+    "mnemonic": "CAN'T-ANKEROUS → Someone who CAN'T agree and is always ANGRY (ANKEROUS)."
+  },
+  {
+    "word": "Capable",
+    "id": 215,
+    "meaning": "Having the ability, fitness, or quality necessary to do or achieve a specified thing",
+    "synonyms": ["Competent"],
+    "antonyms": ["Inept"],
+    "exampleSentence": "She is a highly capable leader who has managed teams of over fifty people.",
+    "mnemonic": "CAP-ABLE → You are ABLE to wear the CAP of leadership — capable!"
+  },
+  {
+    "word": "Capricious",
+    "id": 216,
+    "meaning": "Given to sudden and unaccountable changes of mood or behaviour",
+    "synonyms": ["Whimsical", "Arbitrary"],
+    "antonyms": ["Firm", "Reasonable"],
+    "exampleSentence": "The capricious weather changed from sunny to stormy within minutes.",
+    "mnemonic": "CAPRI-CIOUS → Like a CAPRI goat jumping around unpredictably!"
+  },
+  {
+    "word": "Captivate",
+    "id": 217,
+    "meaning": "Attract and hold the interest and attention of; charm",
+    "synonyms": ["Allure", "Charm", "Fascinate"],
+    "antonyms": ["Distract", "Disillusion", "Offend"],
+    "exampleSentence": "The magician's performance captivated the entire audience for two hours.",
+    "mnemonic": "CAPTIV-ATE → To make someone a CAPTIVE of your charm — captivated!"
+  },
+  {
+    "word": "Casual",
+    "id": 218,
+    "meaning": "Relaxed and unconcerned",
+    "synonyms": ["Occasional"],
+    "antonyms": ["Formal", "Planned"],
+    "exampleSentence": "He dressed in casual clothes for the informal gathering at his friend's house.",
+    "mnemonic": "CASUAL → Think of a CASUAL Friday — relaxed, no formality."
+  },
+  {
+    "word": "Catastrophe",
+    "id": 219,
+    "meaning": "An event causing great and often sudden damage or suffering; a disaster",
+    "synonyms": ["Calamity", "Tragedy", "Disaster"],
+    "antonyms": ["Blessing"],
+    "exampleSentence": "The oil spill was an environmental catastrophe that affected marine life for years.",
+    "mnemonic": "CAT-ASTROPHE → Imagine a CAT causing an ASTROPHE (disaster) by knocking everything off the table!"
+  },
+  {
+    "word": "Caustic",
+    "id": 220,
+    "meaning": "Able to burn or corrode organic tissue by chemical action; sarcastically biting",
+    "synonyms": ["Acidic"],
+    "antonyms": ["Kind"],
+    "exampleSentence": "Her caustic remarks about his presentation embarrassed him in front of the team.",
+    "mnemonic": "CAUS-TIC → CAUSE + STICK — caustic chemicals CAUSE things to STICK and burn."
+  },
+  {
+    "word": "Cautious",
+    "id": 221,
+    "meaning": "(Of a person) careful to avoid potential problems or dangers",
+    "synonyms": ["Vigilant", "Alert", "Careful", "Prudent"],
+    "antonyms": ["Negligent", "Reckless", "Careless"],
+    "exampleSentence": "The cautious driver always checked his mirrors before changing lanes.",
+    "mnemonic": "CAUT-IOUS → CAUTION-OUS — full of CAUTION, always careful."
+  },
+  {
+    "word": "Cavalier",
+    "id": 222,
+    "meaning": "Showing a lack of proper concern; offhand or dismissive; carefree and nonchalant",
+    "synonyms": [],
+    "antonyms": [],
+    "exampleSentence": "His cavalier attitude towards safety regulations eventually led to an accident.",
+    "mnemonic": "CAVALIER → A knight on a horse (CAVALIER) who rides carelessly — showing no concern!"
+  },
+  {
+    "word": "Cease",
+    "id": 223,
+    "meaning": "To bring or come to an end",
+    "synonyms": ["Stop", "Discontinue"],
+    "antonyms": ["Initiate", "Continue", "Start", "Commence"],
+    "exampleSentence": "The factory was ordered to cease operations until the safety inspection was complete.",
+    "mnemonic": "CEASE → CEASE-FIRE means to STOP firing — cease means stop!"
+  },
+  {
+    "word": "Celebrate",
+    "id": 224,
+    "meaning": "To acknowledge (a significant or happy day or event) with a social gathering or enjoyable activity; honour or praise publicly",
+    "synonyms": ["Honour"],
+    "antonyms": ["Disgrace"],
+    "exampleSentence": "The whole town gathered to celebrate the festival with music and dancing.",
+    "mnemonic": "CELEB-RATE → Celebrities RATE their parties highly — they love to celebrate!"
+  },
+  {
+    "word": "Celestial",
+    "id": 225,
+    "meaning": "Positioned in or relating to the sky or outer space",
+    "synonyms": ["Heavenly"],
+    "antonyms": ["Hellish", "Terrestrial", "Earthly"],
+    "exampleSentence": "The astronomer spent hours observing celestial bodies through his telescope.",
+    "mnemonic": "CELEST-IAL → Think of CELESTE (sky blue) — celestial means related to the sky or heavens."
+  },
+  {
+    "word": "Censure",
+    "id": 226,
+    "meaning": "Express severe disapproval of (someone or something), especially in a formal statement",
+    "synonyms": ["Criticise", "Reprimand", "Condemn", "Rebuke"],
+    "antonyms": ["Praise", "Applause", "Approve"],
+    "exampleSentence": "Parliament voted to censure the minister for his unethical conduct.",
+    "mnemonic": "CEN-SURE → CENSOR + SURE — when you CENSOR someone, you're SURELY disapproving of them."
+  },
+  {
+    "word": "Certain",
+    "id": 227,
+    "meaning": "Known for sure; established beyond doubt",
+    "synonyms": ["Sure", "Definite"],
+    "antonyms": ["Doubt"],
+    "exampleSentence": "I am certain that the meeting is scheduled for tomorrow morning.",
+    "mnemonic": "CER-TAIN → CERTAIN sounds like 'SIR-TAIN' — 'Sir, it's certain!' — beyond doubt."
+  },
+  {
+    "word": "Chagrin",
+    "id": 228,
+    "meaning": "Distress or embarrassment at having failed or been humiliated",
+    "synonyms": ["Embarrassment"],
+    "antonyms": ["Pleasure"],
+    "exampleSentence": "Much to her chagrin, she realized she had been calling him by the wrong name all evening.",
+    "mnemonic": "CHA-GRIN → Your GRIN turns into a CHA (sad expression) — embarrassment!"
+  },
+  {
+    "word": "Change",
+    "id": 229,
+    "meaning": "To make or become different",
+    "synonyms": ["Alter"],
+    "antonyms": ["Stabilize"],
+    "exampleSentence": "The new policy will change the way employees work from home.",
+    "mnemonic": "CHANGE → Think of CHANGING clothes — making something different."
+  },
+  {
+    "word": "Chaos",
+    "id": 230,
+    "meaning": "Complete disorder and confusion",
+    "synonyms": ["Disorder", "Confusion"],
+    "antonyms": ["Order", "Arrangement"],
+    "exampleSentence": "The sudden power outage caused chaos in the busy shopping mall.",
+    "mnemonic": "CHAOS → CHA-OS → Imagine the Operating System (OS) crashing — total CHAOS!"
+  },
+  {
+    "word": "Chaotic",
+    "id": 231,
+    "meaning": "In a state of complete confusion and disorder",
+    "synonyms": ["Confused"],
+    "antonyms": ["Organised"],
+    "exampleSentence": "The chaotic traffic during rush hour makes commuting a nightmare.",
+    "mnemonic": "CHAOT-IC → Full of CHAOS — completely disordered."
+  },
+  {
+    "word": "Chaste",
+    "id": 232,
+    "meaning": "Not having any sexual nature or intention",
+    "synonyms": ["Pure"],
+    "antonyms": ["Corrupt", "Dirty"],
+    "exampleSentence": "The novel portrays a chaste love story between two childhood friends.",
+    "mnemonic": "CHASTE → Think of a CHEST that is locked PURE and untouched."
+  },
+  {
+    "word": "Chastise",
+    "id": 233,
+    "meaning": "Rebuke or reprimand severely",
+    "synonyms": ["Upbraid", "Reprimand", "Punish"],
+    "antonyms": ["Praise", "Extol", "Compliment"],
+    "exampleSentence": "The teacher chastised the student for repeatedly coming late to class.",
+    "mnemonic": "CHAST-ISE → CHASE + TIES — imagine someone CHASING you to TIE you up as punishment!"
+  },
+  {
+    "word": "Chauvinism",
+    "id": 234,
+    "meaning": "Excessive or prejudiced loyalty or support for one's own cause, group, or gender",
+    "synonyms": ["Zealotry", "Blind Patriotism"],
+    "antonyms": ["Unbiased"],
+    "exampleSentence": "His chauvinism made him believe his country could do no wrong.",
+    "mnemonic": "CHAUVIN-ISM → Named after Nicolas Chauvin, a blindly loyal French soldier."
+  },
+  {
+    "word": "Cherish",
+    "id": 235,
+    "meaning": "Protect and care for (someone) lovingly",
+    "synonyms": ["Nurture", "Admire"],
+    "antonyms": ["Abandon", "Despised", "Deprecate", "Discard", "Detest"],
+    "exampleSentence": "She will always cherish the memories of her childhood in the countryside.",
+    "mnemonic": "CHER-ISH → CHERRY-ISH — treat someone like a precious CHERRY — lovingly!"
+  },
+  {
+    "word": "Chide",
+    "id": 236,
+    "meaning": "Scold or rebuke",
+    "synonyms": ["Rebuke", "Scold"],
+    "antonyms": ["Applaud"],
+    "exampleSentence": "The mother gently chided her son for not finishing his homework.",
+    "mnemonic": "CHIDE → CHILD — you CHIDE (scold) a CHILD who misbehaves."
+  },
+  {
+    "word": "Chivalrous",
+    "id": 237,
+    "meaning": "(Of a man or his behaviour) courteous and gallant, especially towards women",
+    "synonyms": ["Heroic", "Gallant"],
+    "antonyms": ["Cowardly", "Defiant", "Degraded"],
+    "exampleSentence": "The chivalrous knight rescued the princess from the dragon's lair.",
+    "mnemonic": "CHIVAL-ROUS → Think of medieval CAVALRY knights — gallant and courteous."
+  },
+  {
+    "word": "Chronic",
+    "id": 238,
+    "meaning": "(Of an illness) persisting for a long time or constantly recurring",
+    "synonyms": ["Persistent"],
+    "antonyms": ["Infrequent", "Temporary"],
+    "exampleSentence": "She has been suffering from chronic back pain for over five years.",
+    "mnemonic": "CHRON-IC → CHRONO means time — chronic means lasting a long TIME."
+  },
+  {
+    "word": "Churlish",
+    "id": 239,
+    "meaning": "Rude in a mean-spirited and surly way",
+    "synonyms": ["Sullen"],
+    "antonyms": ["Courteous"],
+    "exampleSentence": "It would be churlish to refuse such a generous invitation.",
+    "mnemonic": "CHURL-ISH → A CHURL is a rude peasant — churlish means rude and surly."
+  },
+  {
+    "word": "Circuitous",
+    "id": 240,
+    "meaning": "(Of a route or journey) longer than the most direct way",
+    "synonyms": ["Roundabout"],
+    "antonyms": ["Direct"],
+    "exampleSentence": "We took a circuitous route through the countryside to avoid the highway traffic.",
+    "mnemonic": "CIRCUIT-OUS → A CIRCUIT goes around in a loop — circuitous means roundabout!"
+  },
+  {
+    "word": "Clamorous",
+    "id": 241,
+    "meaning": "Making a loud and confused noise",
+    "synonyms": ["Boisterous"],
+    "antonyms": ["Suppression"],
+    "exampleSentence": "The clamorous protest outside the parliament building could be heard blocks away.",
+    "mnemonic": "CLAMOR-OUS → Full of CLAMOR — loud and noisy!"
+  },
+  {
+    "word": "Clamour",
+    "id": 242,
+    "meaning": "A loud appeal or demand",
+    "synonyms": ["Uproar"],
+    "antonyms": ["Quiet"],
+    "exampleSentence": "There was a great clamour among the citizens for better healthcare facilities.",
+    "mnemonic": "CLAM-OUR → Imagine CLAMS making OUR ears ring with their noise — clamour!"
+  },
+  {
+    "word": "Clandestine",
+    "id": 243,
+    "meaning": "Kept secret or done secretively, especially because illicit",
+    "synonyms": ["Secret", "Covert"],
+    "antonyms": ["Open", "Honest", "Conspicuous", "Public", "Known", "Legal"],
+    "exampleSentence": "The spy conducted clandestine meetings in an abandoned warehouse at midnight.",
+    "mnemonic": "CLAN-DESTINE → A secret CLAN with a hidden DESTINY — clandestine means secret!"
+  },
+  {
+    "word": "Clash",
+    "id": 244,
+    "meaning": "A violent confrontation; as a verb, to meet and come into violent conflict",
+    "synonyms": ["Conflicted"],
+    "antonyms": ["Harmony"],
+    "exampleSentence": "The clash between the two rival groups resulted in several injuries.",
+    "mnemonic": "CLASH → The CRASH and LASH of swords — a violent clash!"
+  },
+  {
+    "word": "Clumsy",
+    "id": 245,
+    "meaning": "Awkward in movement or in handling things",
+    "synonyms": ["Unskilful"],
+    "antonyms": ["Graceful"],
+    "exampleSentence": "The clumsy waiter spilled soup on the customer's shirt.",
+    "mnemonic": "CLUM-SY → Imagine someone who CLIMBS messily — they're clumsy!"
+  },
+  {
+    "word": "Cluster",
+    "id": 246,
+    "meaning": "Group of similar things or people positioned close together; gather into clusters",
+    "synonyms": ["Assemblage"],
+    "antonyms": ["Individual"],
+    "exampleSentence": "A cluster of stars was visible in the clear night sky.",
+    "mnemonic": "CLUST-ER → Think of a CLUSTER of grapes — grouped closely together."
+  },
+  {
+    "word": "Coarse",
+    "id": 247,
+    "meaning": "Rough or loose in texture or grain",
+    "synonyms": ["Rough", "Crude", "Scratchy"],
+    "antonyms": ["Smooth", "Gentle", "Refined", "Buttery", "Soft", "Delicate", "Fine", "Chaste"],
+    "exampleSentence": "The coarse sandpaper was perfect for removing the old paint from the wooden fence.",
+    "mnemonic": "COARSE → Think of a HORSE with a COARSE mane — rough to the touch."
+  },
+  {
+    "word": "Coerce",
+    "id": 248,
+    "meaning": "Persuade (an unwilling person) to do something by using force or threats",
+    "synonyms": ["Pressurize"],
+    "antonyms": ["Assist"],
+    "exampleSentence": "The bully tried to coerce the younger students into giving up their lunch money.",
+    "mnemonic": "CO-ERCE → CO + FORCE — to use FORCE together to make someone comply."
+  },
+  {
+    "word": "Cogent",
+    "id": 249,
+    "meaning": "(Of an argument or case) clear, logical, and convincing",
+    "synonyms": ["Effective", "Convincing", "Rational"],
+    "antonyms": ["Impotent", "Unconvincing", "Ineffective"],
+    "exampleSentence": "The lawyer presented a cogent argument that convinced the jury of her client's innocence.",
+    "mnemonic": "CO-GENT → A CO-AGENT (co-gent) who makes a convincing case — clear and logical!"
+  },
+  {
+    "word": "Colloquial",
+    "id": 250,
+    "meaning": "(Of language) used in ordinary or familiar conversation; not formal or literary",
+    "synonyms": ["Familiar", "Conversational"],
+    "antonyms": ["Formal", "Literary"],
+    "exampleSentence": "The essay was rejected because it used too much colloquial language instead of academic writing.",
+    "mnemonic": "COLLO-QUIAL → COLL (college) + QUIAL (talk) — the casual way students TALK in COLLEGE."
+  },
+  {
+    "word": "Colossal",
+    "id": 251,
+    "meaning": "Extremely large or great",
+    "synonyms": ["Enormous", "Gigantic", "Immense", "Huge"],
+    "antonyms": ["Small", "Minimal", "Tiny", "Teeny", "Short", "Negligible"],
+    "exampleSentence": "The company suffered a colossal loss of revenue due to the data breach.",
+    "mnemonic": "COLOSS-AL → Think of the COLOSSEUM in Rome — a colossal ancient structure!"
+  },
+  {
+    "word": "Comely",
+    "id": 252,
+    "meaning": "Pleasant to look at; attractive",
+    "synonyms": ["Pretty"],
+    "antonyms": ["Grotesque"],
+    "exampleSentence": "The comely young woman drew admiring glances as she walked through the garden.",
+    "mnemonic": "COME-LY → Someone who makes you say 'COME, LY (look) at how pretty!' — comely!"
+  },
+  {
+    "word": "Comic",
+    "id": 253,
+    "meaning": "Causing or meant to cause laughter",
+    "synonyms": ["Funny"],
+    "antonyms": ["Tragic"],
+    "exampleSentence": "His comic timing was perfect, and the audience burst into laughter.",
+    "mnemonic": "COMIC → Think of COMIC books — designed to be funny and entertaining."
+  },
+  {
+    "word": "Command",
+    "id": 254,
+    "meaning": "Give an authoritative order",
+    "synonyms": ["Instruct"],
+    "antonyms": ["Opposition", "Permission"],
+    "exampleSentence": "The general issued a command for the troops to advance at dawn.",
+    "mnemonic": "COM-MAND → A COMMANDER gives a COMMAND — an authoritative order."
+  },
+  {
+    "word": "Commence",
+    "id": 255,
+    "meaning": "Begin; start",
+    "synonyms": ["Start", "Launch", "Initiate"],
+    "antonyms": ["Conclude", "Close", "Terminate"],
+    "exampleSentence": "The ceremony will commence at exactly ten o'clock in the morning.",
+    "mnemonic": "COM-MENCE → Think of COMMENCEMENT ceremony — the START of a new journey!"
+  },
+  {
+    "word": "Commitment",
+    "id": 256,
+    "meaning": "The state or quality of being dedicated to a cause, activity, etc",
+    "synonyms": ["Guarantee"],
+    "antonyms": ["Breach"],
+    "exampleSentence": "Her commitment to environmental conservation inspired many young activists.",
+    "mnemonic": "COMMIT-MENT → When you COMMIT, you show COMMITMENT — total dedication."
+  },
+  {
+    "word": "Committed",
+    "id": 257,
+    "meaning": "Feeling dedication and loyalty to a cause, activity, or job; wholeheartedly dedicated",
+    "synonyms": ["Devoted", "Dedicated", "Engaged"],
+    "antonyms": ["Uncertain", "Unmotivated"],
+    "exampleSentence": "The committed volunteers worked tirelessly to rebuild homes after the flood.",
+    "mnemonic": "COMMIT-TED → Someone who has COMMITTED themselves — fully dedicated."
+  },
+  {
+    "word": "Common",
+    "id": 258,
+    "meaning": "Occurring, found, or done often; prevalent",
+    "synonyms": ["Usual"],
+    "antonyms": ["Rare"],
+    "exampleSentence": "It is common for students to feel nervous before an important examination.",
+    "mnemonic": "COMMON → COME + ON — 'COME ON, that's COMMON!' — something ordinary and frequent."
+  },
+  {
+    "word": "Commotion",
+    "id": 259,
+    "meaning": "A state of confused and noisy disturbance",
+    "synonyms": ["Disturbance", "Fuss", "Bustle", "Uproar"],
+    "antonyms": ["Quietude"],
+    "exampleSentence": "The stray dog running through the classroom caused a huge commotion among the students.",
+    "mnemonic": "COM-MOTION → COMMON MOTION everywhere — a noisy disturbance with people moving about!"
+  },
+  {
+    "word": "Compact",
+    "id": 260,
+    "meaning": "Closely and neatly packed together; dense; having all the necessary components or features neatly fitted into a small space",
+    "synonyms": ["Dense", "Condensed"],
+    "antonyms": ["Loose", "Expand"],
+    "exampleSentence": "The compact design of the apartment made clever use of every inch of space.",
+    "mnemonic": "COM-PACT → A PACT to keep things COMpressed — compact means tightly packed."
+  }
+]

@@ -1,0 +1,16 @@
+---
+// SectionLabel.astro — Reusable label with an SVG icon and text
+interface Props {
+  label: string;
+  iconPath: string; // SVG <path d="..."> value
+}
+
+const { label, iconPath } = Astro.props;
+---
+
+<div class="section-label">
+  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={iconPath}></path>
+  </svg>
+  {label}
+</div>

@@ -1,0 +1,17 @@
+---
+// ChipList.astro — Renders a chips container populated at runtime by app.js
+interface Props {
+  id: string;
+  label: string;
+  iconPath: string;
+}
+
+import SectionLabel from './SectionLabel.astro';
+
+const { id, label, iconPath } = Astro.props;
+---
+
+<div class="content-section">
+  <SectionLabel label={label} iconPath={iconPath} />
+  <div class="chips-container" id={id}></div>
+</div>

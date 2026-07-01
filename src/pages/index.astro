@@ -1,17 +1,29 @@
 ---
+/**
+ * index.astro — Home page.
+ *
+ * Thin orchestrator: injects word data into window.__vocabWords
+ * and loads the modular learning engine from public/scripts/.
+ */
+import type { Word } from '../types/word';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import words from '../data/words.json';
+import '../styles/global.css';
 
+const typedWords = words as Word[];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="VocabBuilder — Master Your Words">
+  <!-- App root — all screens are rendered here by ui.js -->
+  <div class="app-container">
+    <div id="app-root"></div>
+  </div>
+
+  <!-- Bridge: expose server-side data to the static client script -->
+  <script is:inline define:vars={{ typedWords }}>
+    window.__vocabWords = typedWords;
+  </script>
+
+  <!-- Load the modular learning engine as an ES module -->
+  <script is:inline type="module" src="/scripts/app.js"></script>
+</BaseLayout>
