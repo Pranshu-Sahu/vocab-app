@@ -22,3 +22,9 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# python utility scripts and source assets
+vocab-source.pdf
+/scripts/
+check_pdf.py
+test_gemini.py

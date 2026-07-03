@@ -55,6 +55,10 @@ function createDefaultState() {
       currentStreak: 0,
       bestStreak: 0,
       lastSessionDate: null,         // ISO date 'YYYY-MM-DD'
+      xp: 0,
+      level: 1,
+      badges: [],
+      sessionHistory: [],            // Array of { date: string, score: number, mode: string, xpGained: number }
     },
   };
 }
@@ -173,6 +177,22 @@ function getComputedStats(totalWordCount) {
       totalWordCount > 0
         ? Math.round((wordsLearned / totalWordCount) * 100)
         : 0,
+    xp: _state.stats.xp || 0,
+    level: _state.stats.level || 1,
+    badges: (_state.stats.badges || []).map(b => {
+      const id = typeof b === 'string' ? b : b.id;
+      const dateEarned = typeof b === 'string' ? new Date().toISOString() : b.dateEarned;
+      const meta = CONFIG.BADGES[id] || { title: id, icon: '🏆', description: '' };
+      return {
+        id,
+        dateEarned,
+        name: meta.title,
+        title: meta.title,
+        icon: meta.icon,
+        description: meta.description
+      };
+    }),
+    sessionHistory: _state.stats.sessionHistory || [],
   };
 }
 

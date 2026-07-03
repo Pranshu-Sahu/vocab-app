@@ -13,9 +13,10 @@
 
 import CONFIG    from './config.js';
 import Store     from './store.js';
-import Engine    from './engine.js';
-import Questions from './questions.js';
-import UI        from './ui.js';
+import Engine     from './engine.js';
+import Questions  from './questions.js';
+import UI         from './ui.js';
+import Gamification from './gamification.js';
 
 /* ── Module-level state ────────────────────────────────────── */
 
@@ -50,6 +51,8 @@ function showDashboard() {
       onStartSession: startSession,
       onWeakWords:    startWeakReview,
       onReset:        handleReset,
+      onExamMock:     startMockExam,
+      onExamPYQ:      startPYQExam,
     });
   });
 }
@@ -158,6 +161,8 @@ function startQuizPhase(step) {
   let count;
   if (quizType === 'practice')      count = CONFIG.QUESTIONS_PER_PRACTICE;
   else if (quizType === 'revision') count = CONFIG.QUESTIONS_PER_REVISION;
+  else if (quizType === 'mock-exam' || quizType === 'pyq-exam') count = 20;
+  else if (quizType === 'weak-review') count = 15;
   else                              count = CONFIG.QUESTIONS_PER_DUE_REVISION;
 
   // Cap to pool size (don't ask more questions than words × 2)
@@ -183,6 +188,8 @@ function quizLabel() {
   if (quizType === 'revision')      return 'Mixed Revision';
   if (quizType === 'due-revision')  return 'Daily Review';
   if (quizType === 'weak-review')   return 'Weak Words';
+  if (quizType === 'mock-exam')     return 'Mock Exam';
+  if (quizType === 'pyq-exam')      return 'PYQ Mode';
   return 'Quiz';
 }
 
@@ -199,6 +206,14 @@ function showQuizQuestion() {
         onAnswer: (correct, userAnswer) => {
           // Record in engine
           Engine.recordAnswer(question.wordId, correct);
+          
+          let xpGained = 0;
+          if (correct) {
+            const wordObj = allWords.find((w) => w.id === question.wordId);
+            const diff = wordObj ? wordObj.difficulty : 'Medium';
+            xpGained = Gamification.calculateXP(diff);
+            Gamification.addXP(xpGained);
+          }
 
           // Track for results screen
           const wordObj = allWords.find((w) => w.id === question.wordId);
@@ -208,6 +223,7 @@ function showQuizQuestion() {
             correct,
             userAnswer,
             correctAnswer: question.correctAnswer || '',
+            xpGained
           });
         },
         onNext: () => {
@@ -229,6 +245,32 @@ function showQuizResults() {
     Engine.markBatchPracticed(quizBatchIdx);
   }
 
+  // Calculate total XP gained in this quiz
+  const totalXPGained = quizAnswers.reduce((sum, a) => sum + (a.xpGained || 0), 0);
+  const correctCount = quizAnswers.filter((a) => a.correct).length;
+  const scorePct = quizAnswers.length > 0 ? Math.round((correctCount / quizAnswers.length) * 100) : 0;
+  
+  // Record session for history
+  Gamification.recordSession(scorePct, quizType, quizAnswers.length, totalXPGained);
+  
+  // Evaluate badges
+  const newBadges = Gamification.evaluateBadges();
+  
+  // Show unlocked badges via UI modal (optional/future)
+  if (newBadges.length > 0) {
+    console.log("Unlocked Badges:", newBadges);
+  }
+
+  const newBadgesMapped = newBadges.map(id => {
+    const meta = CONFIG.BADGES[id] || { title: id, icon: '🏆', description: '' };
+    return {
+      id,
+      name: meta.title,
+      title: meta.title,
+      icon: meta.icon
+    };
+  });
+
   UI.fadeTransition(() => {
     UI.renderQuizResults(quizAnswers, quizLabel(), {
       onContinue: () => {
@@ -245,13 +287,15 @@ function showQuizResults() {
         }
         advanceStep();
       },
-    });
+    }, { xpGained: totalXPGained, badges: newBadgesMapped });
   });
 }
 
 /* ── Session Complete ──────────────────────────────────────── */
 
 function showSessionComplete() {
+  // Ensure streak updates when session completes
+  Engine.updateStreak();
   const stats = Store.getComputedStats(allWords.length);
 
   UI.fadeTransition(() => {
@@ -281,6 +325,34 @@ function startWeakReview() {
 function handleReset() {
   Store.resetAll();
   showDashboard();
+}
+
+/* ── Exam Modes ────────────────────────────────────────────── */
+
+function startMockExam() {
+  const shuffled = [...allWords].sort(() => 0.5 - Math.random());
+  const examWords = shuffled.slice(0, 20);
+  
+  if (examWords.length === 0) return;
+
+  sessionSteps = [{ type: 'quiz', quizType: 'mock-exam', words: examWords }];
+  currentStepIndex = 0;
+  executeCurrentStep();
+}
+
+function startPYQExam() {
+  const pyqWords = allWords.filter(w => w.timesAskedTotal && w.timesAskedTotal > 0);
+  if (pyqWords.length === 0) {
+    alert("No PYQ words (words from past exams) available in your vocabulary yet.");
+    return;
+  }
+  
+  const shuffled = pyqWords.sort(() => 0.5 - Math.random());
+  const examWords = shuffled.slice(0, 20);
+  
+  sessionSteps = [{ type: 'quiz', quizType: 'pyq-exam', words: examWords }];
+  currentStepIndex = 0;
+  executeCurrentStep();
 }
 
 /* ── Bootstrap ─────────────────────────────────────────────── */

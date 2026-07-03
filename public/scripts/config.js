@@ -85,6 +85,36 @@ const CONFIG = {
 
   /** localStorage key for all persisted state */
   STORAGE_KEY: 'vocab_engine_state',
+
+  /* ── Gamification ────────────────────────────────────────── */
+
+  /** XP earned for a correct answer */
+  XP_PER_CORRECT_ANSWER: 10,
+
+  /** XP Multipliers based on word difficulty */
+  DIFFICULTY_MULTIPLIERS: {
+    'Easy': 1,
+    'Medium': 1.5,
+    'Hard': 2,
+  },
+
+  /** Level thresholds (cumulative XP needed) */
+  LEVEL_THRESHOLDS: [
+    { level: 1, title: 'Bronze Scholar', xp: 0 },
+    { level: 2, title: 'Silver Wordsmith', xp: 500 },
+    { level: 3, title: 'Gold Linguist', xp: 2000 },
+    { level: 4, title: 'Platinum Lexicographer', xp: 5000 },
+    { level: 5, title: 'Diamond Grandmaster', xp: 10000 },
+  ],
+
+  /** Badges definition */
+  BADGES: {
+    FIRST_BLOOD: { id: 'FIRST_BLOOD', title: 'First Blood', description: 'Complete your first practice session', icon: '🎯' },
+    STREAK_7: { id: 'STREAK_7', title: '7-Day Streak', description: 'Study for 7 days in a row', icon: '🔥' },
+    CENTURY: { id: 'CENTURY', title: 'Century', description: 'Learn 100 words', icon: '💯' },
+    PERFECTIONIST: { id: 'PERFECTIONIST', title: 'Perfectionist', description: 'Get 100% accuracy in a 25-question exam', icon: '✨' },
+    HARD_WORKER: { id: 'HARD_WORKER', title: 'Hard Worker', description: 'Master 10 Hard difficulty words', icon: '💪' }
+  },
 };
 
 export default CONFIG;

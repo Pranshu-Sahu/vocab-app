@@ -30,6 +30,8 @@ const ICONS = {
   trophy:   'M12 15l-2 5h4l-2-5zm-3.5-3a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0z',
   fire:     'M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z',
   refresh:  'M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15',
+  star:     'M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z',
+  badge:    'M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z',
 };
 
 /** Create an SVG icon element. */
@@ -172,6 +174,19 @@ function renderDashboard(computedStats, sessionPlan, callbacks) {
         </div>
       </div>
 
+      <!-- Level & XP -->
+      <div class="level-section" style="text-align: center; margin-bottom: 0.5rem; display: flex; flex-direction: column; align-items: center;">
+        <div class="level-badge" style="display:inline-flex; align-items:center; gap:0.5rem; background: rgba(247, 183, 49, 0.15); color: var(--color-warning); padding: 0.4rem 1rem; border-radius: 99px; font-weight: 700; border: 1px solid rgba(247, 183, 49, 0.3); font-size: 1.1rem; box-shadow: 0 4px 15px rgba(247, 183, 49, 0.2);">
+          ${icon(ICONS.star, 20)} Level ${s.level || 1}
+        </div>
+        <div class="xp-bar" style="width: 100%; max-width: 240px; height: 6px; background: rgba(255,255,255,0.06); border-radius: 99px; margin: 0.8rem 0 0.4rem; overflow: hidden; position: relative;">
+          <div class="xp-fill" style="height: 100%; background: var(--accent-gradient); width: ${((s.xp || 0) % 500) / 5}%; transition: width 0.5s ease-out; box-shadow: 0 0 10px var(--accent-glow);"></div>
+        </div>
+        <div style="color: var(--text-muted); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase;">
+          ${s.xp || 0} XP <span style="opacity: 0.5; margin: 0 0.3rem;">•</span> ${500 - ((s.xp || 0) % 500)} TO NEXT LEVEL
+        </div>
+      </div>
+
       <!-- Stats Grid -->
       <div class="stats-grid">
         <div class="stat-card">
@@ -229,6 +244,34 @@ function renderDashboard(computedStats, sessionPlan, callbacks) {
       ` : ''}
 
       <button class="tertiary-btn" id="btn-reset">Reset All Progress</button>
+
+      <!-- Exam Modes -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 1rem; width: 100%;">
+        <button class="secondary-btn" id="btn-exam-mock" style="background: rgba(46, 196, 182, 0.1); border-color: rgba(46, 196, 182, 0.3); color: var(--color-correct);">
+          ${icon(ICONS.fire, 18)} Mock Test
+        </button>
+        <button class="secondary-btn" id="btn-exam-pyq" style="background: rgba(247, 183, 49, 0.1); border-color: rgba(247, 183, 49, 0.3); color: var(--color-warning);">
+          ${icon(ICONS.badge, 18)} PYQ Mode
+        </button>
+      </div>
+
+      <!-- Badges section -->
+      ${s.badges && s.badges.length > 0 ? `
+        <div style="margin-top: 2rem; width: 100%; text-align: center;">
+          <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 1rem;">
+            ${icon(ICONS.badge, 18)} <h3 style="font-size: 1.1rem; color: #fff;">Achievements</h3>
+          </div>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+            ${s.badges.map(b => `
+              <div style="background: rgba(157, 78, 221, 0.1); border: 1px solid rgba(157, 78, 221, 0.3); padding: 0.8rem 1rem; border-radius: var(--radius-md); text-align: center; min-width: 120px;">
+                <div style="font-size: 2rem; margin-bottom: 0.4rem;">${b.icon}</div>
+                <div style="font-weight: 600; font-size: 0.9rem; color: #fff;">${b.name}</div>
+                <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 0.2rem;">${b.dateEarned.split('T')[0]}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      ` : ''}
     </div>
   `;
 
@@ -243,6 +286,12 @@ function renderDashboard(computedStats, sessionPlan, callbacks) {
       callbacks.onReset
     );
   });
+  
+  const mockBtn = $('#btn-exam-mock');
+  if (mockBtn && callbacks.onExamMock) mockBtn.addEventListener('click', callbacks.onExamMock);
+  
+  const pyqBtn = $('#btn-exam-pyq');
+  if (pyqBtn && callbacks.onExamPYQ) pyqBtn.addEventListener('click', callbacks.onExamPYQ);
 }
 
 
@@ -524,7 +573,7 @@ function showFeedback(correct, _userAnswer, message) {
    4. RESULTS SCREEN
    ================================================================ */
 
-function renderQuizResults(answers, quizLabel, callbacks) {
+function renderQuizResults(answers, quizLabel, callbacks, gamificationData = {}) {
   const total   = answers.length;
   const correct = answers.filter((a) => a.correct).length;
   const pct     = total > 0 ? Math.round((correct / total) * 100) : 0;
@@ -573,6 +622,25 @@ function renderQuizResults(answers, quizLabel, callbacks) {
         </div>
         <span class="score-pct">${pct}%</span>
       </div>
+
+      ${gamificationData.xpGained > 0 ? `
+        <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; color: var(--color-warning); font-weight: 700; background: rgba(247, 183, 49, 0.1); padding: 0.8rem 1.5rem; border-radius: 99px; margin-top: 0.5rem;">
+          ${icon(ICONS.star, 22)} <span>+${gamificationData.xpGained} XP Earned!</span>
+        </div>
+      ` : ''}
+
+      ${gamificationData.badges && gamificationData.badges.length > 0 ? `
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem; margin-top: 1rem;">
+          <h3 style="font-size: 1rem; color: #fff;">New Badges Unlocked!</h3>
+          <div style="display: flex; gap: 0.5rem;">
+            ${gamificationData.badges.map(b => `
+              <div style="background: rgba(157,78,221,0.2); border: 1px solid var(--accent-color); padding: 0.5rem 1rem; border-radius: var(--radius-md); font-size: 0.9rem;">
+                <span style="font-size: 1.2rem; margin-right: 0.3rem;">${b.icon}</span> ${b.name}
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      ` : ''}
 
       ${answers.some((a) => !a.correct) ? `
         <div class="answers-review">
@@ -626,6 +694,10 @@ function renderSessionComplete(computedStats, callbacks) {
         <div class="session-stat">
           <span class="session-stat-value">${s.currentStreak}</span>
           <span class="session-stat-label">Day Streak</span>
+        </div>
+        <div class="session-stat" style="grid-column: span 2; background: rgba(247, 183, 49, 0.08); border-color: rgba(247, 183, 49, 0.2);">
+          <span class="session-stat-value" style="color: var(--color-warning);">${icon(ICONS.star, 24)} Level ${s.level}</span>
+          <span class="session-stat-label">${s.xp} Total XP</span>
         </div>
       </div>
 
