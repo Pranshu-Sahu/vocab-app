@@ -1452,3 +1452,166 @@ header p {
 	box-shadow: 0 0 15px var(--color-wrong-glow);
 }
 
+/* ================================================================
+   LEVEL MAP SCREEN (Candy Crush Style)
+   ================================================================ */
+
+.level-map-screen {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 4rem);
+  width: 100%;
+  background: var(--bg-dark);
+  overflow: hidden;
+  position: relative;
+}
+
+.map-header {
+  padding: 1.5rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(18, 18, 18, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  z-index: 10;
+}
+
+.map-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+
+.map-scroll-container {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 40px 0;
+  position: relative;
+  scroll-behavior: smooth;
+  /* Custom scrollbar for map */
+}
+.map-scroll-container::-webkit-scrollbar { width: 0; }
+
+.map-path-container {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* A winding SVG path could go here in background, but we'll use dashed borders to connect nodes */
+.map-path-container::before {
+  content: '';
+  position: absolute;
+  top: 40px;
+  bottom: 40px;
+  left: 50%;
+  width: 2px;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.2) 50%, transparent 50%);
+  background-size: 2px 20px;
+  transform: translateX(-50%);
+  z-index: 0;
+}
+
+.level-node-wrapper {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  margin: 30px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.level-node {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 6px 0 rgba(0,0,0,0.2), 0 10px 20px rgba(0,0,0,0.3);
+  position: relative;
+  outline: none;
+}
+
+.level-node:active:not([disabled]) {
+  transform: translateY(6px);
+  box-shadow: 0 0 0 rgba(0,0,0,0.2), 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* States */
+.node-completed {
+  background: linear-gradient(135deg, #00b09b, #96c93d); /* Vibrant green */
+  border-color: #e2fbd7;
+}
+
+.node-current {
+  background: linear-gradient(135deg, #ff007f, #ff5e62); /* Vibrant pink */
+  border-color: #ffb3d9;
+  animation: pulse-node 2s infinite;
+  z-index: 2;
+  transform: scale(1.15);
+}
+
+.node-current:hover {
+  transform: scale(1.25);
+}
+
+.node-locked {
+  background: #333;
+  border-color: #555;
+  color: #777;
+  cursor: not-allowed;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.3);
+}
+
+/* Pulsing animation for current level */
+@keyframes pulse-node {
+  0% { box-shadow: 0 0 0 0 rgba(255, 0, 127, 0.7), 0 6px 0 rgba(0,0,0,0.2); }
+  70% { box-shadow: 0 0 0 20px rgba(255, 0, 127, 0), 0 6px 0 rgba(0,0,0,0.2); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 0, 127, 0), 0 6px 0 rgba(0,0,0,0.2); }
+}
+
+.avatar-indicator {
+  position: absolute;
+  top: -35px;
+  background: #fff;
+  color: #ff007f;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  pointer-events: none;
+  animation: bounce-indicator 2s infinite;
+}
+
+.avatar-indicator::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px 5px 0;
+  border-style: solid;
+  border-color: #fff transparent transparent transparent;
+}
+
+@keyframes bounce-indicator {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}

@@ -28,3 +28,4 @@ vocab-source.pdf
 /scripts/
 check_pdf.py
 test_gemini.py
+.agents/

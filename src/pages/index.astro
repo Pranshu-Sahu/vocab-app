@@ -8,6 +8,7 @@
 import type { Word } from '../types/word';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import words from '../data/words.json';
+import passages from '../data/passages.json';
 import '../styles/global.css';
 
 const typedWords = words as Word[];
@@ -20,8 +21,9 @@ const typedWords = words as Word[];
   </div>
 
   <!-- Bridge: expose server-side data to the static client script -->
-  <script is:inline define:vars={{ typedWords }}>
+  <script is:inline define:vars={{ typedWords, passages }}>
     window.__vocabWords = typedWords;
+    window.__vocabPassages = passages;
   </script>
 
   <!-- Load the modular learning engine as an ES module -->

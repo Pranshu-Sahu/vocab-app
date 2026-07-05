@@ -50,11 +50,38 @@ function showDashboard() {
     UI.renderDashboard(stats, sessionPlan, {
       onStartSession: startSession,
       onWeakWords:    startWeakReview,
+      onLevelMap:     showLevelMap,
       onReset:        handleReset,
       onExamMock:     startMockExam,
       onExamPYQ:      startPYQExam,
     });
   });
+}
+
+/* ── Level Map ─────────────────────────────────────────────── */
+
+function showLevelMap() {
+  const session = Store.getSession();
+  const totalLevels = Engine.getTotalBatches(allWords);
+  const currentUnlockedLevel = session.currentBatchIndex; // 0-indexed
+
+  UI.fadeTransition(() => {
+    UI.renderLevelMap(totalLevels, currentUnlockedLevel, {
+      onBack: showDashboard,
+      onSelectLevel: (levelNumber) => {
+        startLevelSession(levelNumber);
+      }
+    });
+  });
+}
+
+function startLevelSession(levelNumber) {
+  sessionSteps = Engine.buildLevelSessionPlan(allWords, levelNumber);
+  currentStepIndex = 0;
+  
+  if (sessionSteps.length > 0) {
+    executeCurrentStep();
+  }
 }
 
 /* ── Session Flow ──────────────────────────────────────────── */
@@ -93,6 +120,8 @@ function executeCurrentStep() {
     startLearnPhase(step);
   } else if (step.type === 'quiz') {
     startQuizPhase(step);
+  } else if (step.type === 'macro-practice') {
+    startMacroPracticePhase(step);
   }
 }
 
@@ -140,6 +169,55 @@ function showLearnCard() {
         Engine.markBatchLearned(allWords, learnBatchIndex);
         advanceStep();
       },
+    });
+  });
+}
+
+/* ── Macro Practice Phase ──────────────────────────────────── */
+
+function startMacroPracticePhase(step) {
+  const clozeQuestion = Questions.generateParagraphCloze(step.batchIndex);
+  if (!clozeQuestion || !clozeQuestion.passage) {
+    advanceStep();
+    return;
+  }
+  
+  UI.fadeTransition(() => {
+    UI.renderParagraphCloze(clozeQuestion.passage, {
+      onSubmit: (answers, targetWords) => {
+        let correctCount = 0;
+        let xpGained = 0;
+        
+        answers.forEach((ans, i) => {
+          const isCorrect = ans === targetWords[i];
+          if (isCorrect) correctCount++;
+          
+          const wordObj = allWords.find(w => w.word === targetWords[i]);
+          if (wordObj) {
+            Engine.recordAnswer(wordObj.id, isCorrect);
+            if (isCorrect) {
+              const diff = wordObj.difficulty || 'Medium';
+              const xp = Gamification.calculateXP(diff);
+              xpGained += xp;
+            }
+          }
+        });
+        
+        if (xpGained > 0) {
+          Gamification.addXP(xpGained);
+        }
+        
+        Gamification.recordSession(
+          Math.round((correctCount / targetWords.length) * 100), 
+          'macro-practice', 
+          targetWords.length, 
+          xpGained
+        );
+        Gamification.evaluateBadges();
+        
+        alert(`You got ${correctCount} out of ${targetWords.length} correct in the Paragraph Cloze! (+${xpGained} XP)`);
+        advanceStep();
+      }
     });
   });
 }

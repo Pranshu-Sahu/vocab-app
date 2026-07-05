@@ -232,6 +232,10 @@ function buildSessionPlan(allWords) {
       // 3 — Practice that batch
       steps.push({ type: 'quiz', quizType: 'practice', words: batchWords, batchIndex: batchIdx });
 
+      if (window.__vocabPassages && window.__vocabPassages.some(p => p.batchIndex === batchIdx)) {
+        steps.push({ type: 'macro-practice', batchIndex: batchIdx });
+      }
+
       // 4 — Mixed revision if we've already completed at least one batch before
       if (batchIdx > 0) {
         const revisionPool = getRevisionPool(allWords, batchIdx);
@@ -240,6 +244,27 @@ function buildSessionPlan(allWords) {
     }
   }
 
+  return steps;
+}
+
+/**
+ * Builds a session plan for a specific Candy Crush-style Level (Batch).
+ * levelNumber is 1-indexed (Level 1 = Batch 0).
+ */
+function buildLevelSessionPlan(allWords, levelNumber) {
+  const batchIdx = levelNumber - 1;
+  const levelWords = getBatchWords(allWords, batchIdx);
+  const steps = [];
+  
+  if (levelWords.length > 0) {
+    steps.push({ type: 'learn', batchIndex: batchIdx, words: levelWords });
+    steps.push({ type: 'quiz', quizType: 'practice', words: levelWords, batchIndex: batchIdx });
+    
+    if (window.__vocabPassages && window.__vocabPassages.some(p => p.batchIndex === batchIdx)) {
+      steps.push({ type: 'macro-practice', batchIndex: batchIdx });
+    }
+  }
+  
   return steps;
 }
 
@@ -294,6 +319,7 @@ export const Engine = {
 
   // Session
   buildSessionPlan,
+  buildLevelSessionPlan,
   getSessionPlan,
 };
 

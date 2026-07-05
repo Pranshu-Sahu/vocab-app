@@ -57,6 +57,7 @@ function createDefaultState() {
       lastSessionDate: null,         // ISO date 'YYYY-MM-DD'
       xp: 0,
       level: 1,
+      levelScores: {}, // tracks stars (1-3) per level
       badges: [],
       sessionHistory: [],            // Array of { date: string, score: number, mode: string, xpGained: number }
     },

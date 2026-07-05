@@ -231,9 +231,13 @@ function renderDashboard(computedStats, sessionPlan, callbacks) {
       `}
 
       <!-- CTA -->
-      <button class="cta-btn" id="btn-start-session">
+      <button class="cta-btn" id="btn-start-session" style="margin-bottom: 0.5rem;">
         <span>${sessionPlan.allComplete && !sessionPlan.hasDueRevision ? 'Revise All Words' : 'Start Session'}</span>
         ${icon(ICONS.arrowR, 20)}
+      </button>
+
+      <button class="cta-btn" id="btn-level-map" style="background: linear-gradient(135deg, #ff007f 0%, #ff5e62 100%); box-shadow: 0 4px 15px rgba(255, 0, 127, 0.4);">
+        <span>${icon(ICONS.star, 20)} Level Map</span>
       </button>
 
       ${s.weakWordsCount > 0 ? `
@@ -277,6 +281,9 @@ function renderDashboard(computedStats, sessionPlan, callbacks) {
 
   // Bind events
   $('#btn-start-session').addEventListener('click', callbacks.onStartSession);
+  const mapBtn = $('#btn-level-map');
+  if (mapBtn && callbacks.onLevelMap) mapBtn.addEventListener('click', callbacks.onLevelMap);
+  
   const weakBtn = $('#btn-weak-words');
   if (weakBtn) weakBtn.addEventListener('click', callbacks.onWeakWords);
   $('#btn-reset').addEventListener('click', () => {
@@ -309,6 +316,9 @@ function renderLearnCard(word, position, total, batchLabel, callbacks) {
 
   const hasMnemonic = word.mnemonic && word.mnemonic.trim();
   const hasExample  = word.exampleSentence && word.exampleSentence.trim();
+  const contextText = word.contextSentence || word.exampleSentence || `Can you guess the meaning of the word?`;
+  const regex = new RegExp(`\\b${word.word}\\b`, 'gi');
+  const contextHook = contextText.replace(regex, '________');
 
   root.innerHTML = `
     <div class="screen learn-screen">
@@ -332,41 +342,55 @@ function renderLearnCard(word, position, total, batchLabel, callbacks) {
           <h2 class="word-title">${word.word}</h2>
         </div>
 
-        <!-- Meaning -->
-        <div class="content-section">
-          ${sectionLabel('Meaning', ICONS.meaning)}
-          <p class="explanation-text">${word.meaning}</p>
+        <!-- Phase 1: Contextual Hook -->
+        <div class="content-section" id="context-hook-section">
+          ${sectionLabel('Contextual Hook', ICONS.bulb)}
+          <p class="explanation-text" style="font-style: italic; font-size: 1.1rem;">"${contextHook}"</p>
         </div>
 
-        <!-- Synonyms -->
-        <div class="content-section">
-          ${sectionLabel('Synonyms', ICONS.synonym)}
-          <div class="chips-container">${chipsHTML(word.synonyms)}</div>
+        <div class="reveal-container" id="reveal-container" style="text-align: center; margin: 1.5rem 0;">
+          <button class="cta-btn" id="btn-reveal-meaning">Reveal Meaning</button>
         </div>
 
-        <!-- Antonyms -->
-        <div class="content-section">
-          ${sectionLabel('Antonyms', ICONS.antonym)}
-          <div class="chips-container">${chipsHTML(word.antonyms)}</div>
-        </div>
-
-        ${hasExample ? `
-          <div class="content-section example-section">
-            ${sectionLabel('Example', ICONS.example)}
-            <p class="example-text">"${word.exampleSentence}"</p>
+        <!-- Phase 2: Breakdown (Initially Hidden) -->
+        <div id="breakdown-section" style="display: none;">
+          <!-- Meaning -->
+          <div class="content-section">
+            ${sectionLabel('Meaning', ICONS.meaning)}
+            <p class="explanation-text"><strong>${word.meaning}</strong></p>
+            ${word.hindiMeaning ? `<p class="explanation-text" style="color: var(--text-muted); margin-top: 0.5rem;">${word.hindiMeaning}</p>` : ''}
           </div>
-        ` : ''}
 
-        ${hasMnemonic ? `
-          <div class="mnemonic-box">
-            <div class="mnemonic-header">${icon(ICONS.bulb, 16)} Memory Trick</div>
-            <p class="mnemonic-text">${word.mnemonic}</p>
+          <!-- Synonyms -->
+          <div class="content-section">
+            ${sectionLabel('Synonyms', ICONS.synonym)}
+            <div class="chips-container">${chipsHTML(word.synonyms)}</div>
           </div>
-        ` : ''}
+
+          <!-- Antonyms -->
+          <div class="content-section">
+            ${sectionLabel('Antonyms', ICONS.antonym)}
+            <div class="chips-container">${chipsHTML(word.antonyms)}</div>
+          </div>
+
+          ${hasExample ? `
+            <div class="content-section example-section">
+              ${sectionLabel('Example', ICONS.example)}
+              <p class="example-text">"${word.exampleSentence}"</p>
+            </div>
+          ` : ''}
+
+          ${hasMnemonic ? `
+            <div class="mnemonic-box">
+              <div class="mnemonic-header">${icon(ICONS.bulb, 16)} Memory Trick</div>
+              <p class="mnemonic-text">${word.mnemonic}</p>
+            </div>
+          ` : ''}
+        </div>
       </main>
 
-      <!-- Navigation -->
-      <div class="nav-controls">
+      <!-- Navigation (Initially Hidden until revealed) -->
+      <div class="nav-controls" id="nav-controls" style="display: none;">
         <button id="btn-learn-prev" class="nav-btn" ${position === 0 ? 'disabled' : ''}>
           ${icon(ICONS.arrowL, 20)} Prev
         </button>
@@ -384,6 +408,12 @@ function renderLearnCard(word, position, total, batchLabel, callbacks) {
   `;
 
   // Bind
+  $('#btn-reveal-meaning').addEventListener('click', () => {
+    $('#breakdown-section').style.display = 'block';
+    $('#nav-controls').style.display = 'flex';
+    $('#reveal-container').style.display = 'none';
+  });
+
   $('#btn-back-learn').addEventListener('click', callbacks.onBack);
   const prevBtn = $('#btn-learn-prev');
   if (prevBtn && !prevBtn.disabled) prevBtn.addEventListener('click', callbacks.onPrev);
@@ -729,6 +759,197 @@ function spawnConfetti() {
   }
 }
 
+/* ================================================================
+   6. LEVEL MAP SCREEN
+   ================================================================ */
+
+function renderLevelMap(totalLevels, currentUnlockedLevel, callbacks) {
+  const root = $('#app-root');
+  
+  let nodesHTML = '';
+  // Generate nodes from top to bottom (Level 1 at top, totalLevels at bottom)
+  // or bottom to top like Candy Crush? Candy Crush is usually bottom to top.
+  // Let's do bottom to top. Level 1 at the bottom.
+  for (let i = totalLevels; i >= 1; i--) {
+    const isUnlocked = i <= currentUnlockedLevel + 1; // +1 because currentUnlockedLevel is 0-indexed batch
+    const isCurrent = i === currentUnlockedLevel + 1;
+    const isCompleted = i < currentUnlockedLevel + 1;
+    
+    let stateClass = isCompleted ? 'node-completed' : (isCurrent ? 'node-current' : 'node-locked');
+    
+    // Winding path layout logic
+    // Sine wave pattern: 50% +/- 30%
+    const offset = Math.sin(i * 0.8) * 35;
+    const leftPos = 50 + offset;
+    
+    nodesHTML += `
+      <div class="level-node-wrapper" style="left: ${leftPos}%; margin-top: ${i === totalLevels ? '20px' : '-20px'}">
+        <button class="level-node ${stateClass}" data-level="${i}" ${!isUnlocked ? 'disabled' : ''}>
+          ${i}
+        </button>
+        ${isCurrent ? '<div class="avatar-indicator">You</div>' : ''}
+      </div>
+    `;
+  }
+  
+  function isLocked(level, currentUnlocked) {
+    return level > currentUnlocked + 1;
+  }
+
+  root.innerHTML = `
+    <div class="screen level-map-screen">
+      <div class="map-header">
+        <button class="icon-btn" id="btn-map-back" aria-label="Back to dashboard">
+          ${icon(ICONS.arrowL, 20)}
+        </button>
+        <div class="map-title">Journey Map</div>
+        <div style="width:20px;"></div> <!-- Spacer -->
+      </div>
+      
+      <div class="map-scroll-container">
+        <div class="map-path-container">
+          <!-- The nodes -->
+          ${nodesHTML}
+        </div>
+      </div>
+    </div>
+  `;
+
+  $('#btn-map-back').addEventListener('click', callbacks.onBack);
+  
+  const mapContainer = $('.map-scroll-container');
+  
+  // Scroll to current level (which is towards the bottom)
+  setTimeout(() => {
+    const currentWrapper = $('.node-current')?.parentElement || $('.node-completed:last-child')?.parentElement;
+    if (currentWrapper && mapContainer) {
+      currentWrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, 100);
+
+  root.querySelectorAll('.level-node:not([disabled])').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const level = parseInt(btn.dataset.level, 10);
+      callbacks.onSelectLevel(level);
+    });
+  });
+}
+
+/* ================================================================
+   7. MACRO-INTERACTIVE PRACTICE (PARAGRAPH CLOZE)
+   ================================================================ */
+
+function renderParagraphCloze(passage, callbacks) {
+  const root = $('#app-root');
+  
+  let pText = passage.paragraph;
+  const blanksCount = passage.targetWords.length;
+  const blankAnswers = new Array(blanksCount).fill(null);
+  let selectedBlankIndex = 0; 
+
+  const wordBank = [...passage.targetWords];
+  for (let i = wordBank.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [wordBank[i], wordBank[j]] = [wordBank[j], wordBank[i]];
+  }
+
+  for (let i = 0; i < blanksCount; i++) {
+    const pattern = new RegExp(`\\{blank${i}\\}`, 'g');
+    pText = pText.replace(pattern, `<span class="cloze-blank" data-index="${i}" style="display: inline-block; min-width: 80px; text-align: center; border-bottom: 2px solid var(--accent-color); color: var(--accent-color); cursor: pointer; padding: 0 0.5rem; transition: all 0.2s;">_______</span>`);
+  }
+
+  root.innerHTML = `
+    <div class="screen quiz-screen">
+      <div class="quiz-header">
+        <span class="quiz-type-badge">Paragraph Practice</span>
+      </div>
+
+      <div class="question-card" style="margin-bottom: 2rem;">
+        <div class="question-type-label">Fill in the blanks to complete the paragraph</div>
+        <p class="question-prompt" style="line-height: 2; font-size: 1.2rem; margin-top: 1.5rem;" id="cloze-paragraph">
+          ${pText}
+        </p>
+      </div>
+
+      <div class="word-bank" id="word-bank" style="display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; margin-bottom: 2rem; padding: 1.5rem; background: rgba(255,255,255,0.05); border-radius: var(--radius-md);">
+        ${wordBank.map(w => `<button class="secondary-btn word-bank-btn" data-word="${w}">${w}</button>`).join('')}
+      </div>
+      
+      <div style="display: flex; gap: 1rem; justify-content: center;">
+        <button class="tertiary-btn" id="btn-clear-cloze">Clear All</button>
+        <button class="cta-btn" id="btn-submit-cloze" disabled>Submit Paragraph ${icon(ICONS.arrowR, 18)}</button>
+      </div>
+    </div>
+  `;
+
+  function updateUI() {
+    root.querySelectorAll('.cloze-blank').forEach(el => {
+      const idx = parseInt(el.dataset.index, 10);
+      if (idx === selectedBlankIndex) {
+        el.style.backgroundColor = 'rgba(157, 78, 221, 0.2)';
+        el.style.boxShadow = '0 0 10px rgba(157, 78, 221, 0.5)';
+      } else {
+        el.style.backgroundColor = 'transparent';
+        el.style.boxShadow = 'none';
+      }
+      
+      if (blankAnswers[idx]) {
+        el.textContent = blankAnswers[idx];
+      } else {
+        el.textContent = '_______';
+      }
+    });
+
+    root.querySelectorAll('.word-bank-btn').forEach(btn => {
+      const word = btn.dataset.word;
+      if (blankAnswers.includes(word)) {
+        btn.style.opacity = '0.3';
+        btn.disabled = true;
+      } else {
+        btn.style.opacity = '1';
+        btn.disabled = false;
+      }
+    });
+
+    const allFilled = blankAnswers.every(ans => ans !== null);
+    $('#btn-submit-cloze').disabled = !allFilled;
+  }
+
+  root.querySelectorAll('.cloze-blank').forEach(el => {
+    el.addEventListener('click', () => {
+      const idx = parseInt(el.dataset.index, 10);
+      if (blankAnswers[idx]) {
+        blankAnswers[idx] = null;
+      }
+      selectedBlankIndex = idx;
+      updateUI();
+    });
+  });
+
+  root.querySelectorAll('.word-bank-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (selectedBlankIndex !== null && !blankAnswers[selectedBlankIndex]) {
+        blankAnswers[selectedBlankIndex] = btn.dataset.word;
+        const nextEmpty = blankAnswers.findIndex(ans => ans === null);
+        selectedBlankIndex = nextEmpty !== -1 ? nextEmpty : null;
+        updateUI();
+      }
+    });
+  });
+  
+  $('#btn-clear-cloze').addEventListener('click', () => {
+    blankAnswers.fill(null);
+    selectedBlankIndex = 0;
+    updateUI();
+  });
+
+  $('#btn-submit-cloze').addEventListener('click', () => {
+    callbacks.onSubmit(blankAnswers, passage.targetWords);
+  });
+
+  updateUI();
+}
+
 /* ── Public API ────────────────────────────────────────────── */
 
 export const UI = {
@@ -737,6 +958,8 @@ export const UI = {
   renderQuizQuestion,
   renderQuizResults,
   renderSessionComplete,
+  renderLevelMap,
+  renderParagraphCloze,
   fadeTransition,
 };
 

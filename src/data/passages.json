@@ -1,0 +1,7 @@
+[
+  {
+    "batchIndex": 0,
+    "paragraph": "The art gallery opening was supposed to be a success, but instead it caused a lot of {blank0}. One artist was incredibly {blank1} when the gallery owner refused to {blank2} her {blank3} painting for display. Despite the drama, the show will {blank4} until the end of the week.",
+    "targetWords": ["Confusion", "Angry", "Accept", "Beautiful", "Continue"]
+  }
+]

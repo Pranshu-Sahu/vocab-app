@@ -158,11 +158,11 @@ function antonymMatch(word, allWords) {
 }
 
 /**
- * Fill in the Blank
- * Shows example sentence with the word blanked out.
+ * Context Question (Fill in the blank)
+ * Shows context sentence with the word blanked out.
  */
-function fillBlank(word, allWords) {
-  const sentence = word.exampleSentence;
+function generateContextQuestion(word, allWords) {
+  const sentence = word.contextSentence || word.exampleSentence;
   if (!sentence) return meaningToWord(word, allWords); // fallback
 
   const regex = new RegExp(`\\b${escapeRegex(word.word)}\\b`, 'gi');
@@ -176,12 +176,36 @@ function fillBlank(word, allWords) {
   ]);
 
   return {
-    type: 'fill-blank',
+    type: 'context-question',
     wordId: word.id,
     prompt: 'Fill in the blank:',
     detail: blanked,
     options,
     correctAnswer: word.word,
+  };
+}
+
+/**
+ * Synonym MCQ
+ */
+function generateSynonymMCQ(word, allWords) {
+  if (!word.synonyms || word.synonyms.length === 0) return wordToMeaning(word, allWords);
+
+  const correct = word.synonyms[Math.floor(Math.random() * word.synonyms.length)];
+  const distractors = getDistractors(word, allWords, 3);
+
+  const options = shuffle([
+    { text: correct, correct: true },
+    ...distractors.map((d) => ({ text: d.word, correct: false })),
+  ]);
+
+  return {
+    type: 'synonym-mcq',
+    wordId: word.id,
+    prompt: 'Which of these is a synonym for',
+    detail: word.word,
+    options,
+    correctAnswer: correct,
   };
 }
 
@@ -232,12 +256,12 @@ function multipleChoice(word, allWords) {
 }
 
 /**
- * Type the Word
- * Shows meaning, user types the answer.
+ * Type the Word / Spelling Question
+ * Shows meaning, user types the exact answer.
  */
-function typeTheWord(word) {
+function generateSpellingQuestion(word) {
   return {
-    type: 'type-the-word',
+    type: 'spelling-question',
     wordId: word.id,
     prompt: 'Type the word that means:',
     detail: `"${word.meaning}"`,
@@ -275,11 +299,12 @@ const GENERATORS = {
   'meaning-to-word': meaningToWord,
   'word-to-meaning': wordToMeaning,
   'synonym-match':   synonymMatch,
+  'synonym-mcq':     generateSynonymMCQ,
   'antonym-match':   antonymMatch,
-  'fill-blank':      fillBlank,
+  'context-question': generateContextQuestion,
   'correct-usage':   correctUsage,
   'multiple-choice': multipleChoice,
-  'type-the-word':   typeTheWord,
+  'spelling-question': generateSpellingQuestion,
   'flashcard-recall': flashcardRecall,
 };
 
@@ -364,10 +389,25 @@ function generateQuiz(wordPool, count, allWords, wordProgressMap = {}) {
   return questions;
 }
 
+/**
+ * Paragraph Cloze (Macro Interactive Practice)
+ * Not added to random pool; fetched explicitly by batchIndex.
+ */
+function generateParagraphCloze(batchIndex) {
+  const passages = window.__vocabPassages || [];
+  const passage = passages.find(p => p.batchIndex === batchIndex);
+  if (!passage) return null;
+  return {
+    type: 'paragraph-cloze',
+    passage
+  };
+}
+
 /* ── Public API ────────────────────────────────────────────── */
 
 export const Questions = {
   generateQuiz,
+  generateParagraphCloze,
   shuffle,
 };
 

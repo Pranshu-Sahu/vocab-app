@@ -15,6 +15,7 @@ export interface Word {
   difficulty: 'Easy' | 'Medium' | 'Hard';
   rootWord?: string;
   exampleSentence?: string;
+  contextSentence?: string;
   mnemonic?: string;
   memoryHookWord?: string;
 }
